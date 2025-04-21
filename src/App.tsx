@@ -13,6 +13,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
           <ConnectWallet />
           <TotalSupply />
+          <BalanceOf />
       </QueryClientProvider>
     </WagmiProvider>
   )
@@ -32,6 +33,20 @@ function TotalSupply(){
   )
 }
 
+function BalanceOf(){
+  const {address} = useAccount();
+  const {data, isLoading, error} = useReadContract({
+    address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+    abi: ABI,
+    functionName: 'balanceOf',
+    args: [address?.toString()]
+  })
+  return(
+    <div>
+      USDT Balance Of User - {JSON.stringify(data?.toString())}
+    </div>
+  )  
+}
 
 function ConnectWallet(){
   const { connectors, connect } = useConnect()
