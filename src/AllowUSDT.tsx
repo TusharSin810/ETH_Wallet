@@ -11,7 +11,7 @@ export function AllowUSDT(){
             address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
             abi: ABI,
             functionName: 'approve',
-            args: ["0x2966473D85A76A190697B5b9b66b769436EFE8e5", BigInt(1)],
+            args: ["0x2966473D85A76A190697B5b9b66b769436EFE8e5", BigInt(1000000)],
         })
     }
     return(

@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useAccount, useConnect, useDisconnect, useReadContract, WagmiProvider } from 'wagmi'
 import { config } from './config'
 import { ABI } from './abi'
+import { AllowUSDT } from './AllowUSDT'
 
 const queryClient = new QueryClient()
 
@@ -15,6 +16,7 @@ function App() {
           <TotalSupply />
           <BalanceOf />
           <Account />
+          <AllowUSDT />
       </QueryClientProvider>
     </WagmiProvider>
   )
