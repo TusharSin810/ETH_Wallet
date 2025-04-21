@@ -1,7 +1,8 @@
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useAccount, useConnect, useConnectors, useDisconnect, WagmiProvider } from 'wagmi'
+import { useAccount, useConnect, useDisconnect, useReadContract, WagmiProvider } from 'wagmi'
 import { config } from './config'
+import { ABI } from './abi'
 
 const queryClient = new QueryClient()
 
@@ -11,10 +12,26 @@ function App() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
           <ConnectWallet />
+          <TotalSupply />
       </QueryClientProvider>
     </WagmiProvider>
   )
 }
+
+
+function TotalSupply(){
+  const {data, isLoading, error} = useReadContract({
+    address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+    abi: ABI,
+    functionName: 'totalSupply'
+  })
+  return(
+    <div>
+      Total Supply - {JSON.stringify(data?.toString())}
+    </div>
+  )
+}
+
 
 function ConnectWallet(){
   const { connectors, connect } = useConnect()
