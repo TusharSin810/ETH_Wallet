@@ -14,6 +14,7 @@ function App() {
           <ConnectWallet />
           <TotalSupply />
           <BalanceOf />
+          <Account />
       </QueryClientProvider>
     </WagmiProvider>
   )
@@ -37,7 +38,7 @@ function Account(){
   const {address} = useAccount()
   return(
     <div>
-      {address ? "You Are Connected"+ address : "You Are Not Connected"} 
+      {address ? "You Are Connected - "+ address : "You Are Not Connected"} 
     </div>
   )
 }
@@ -65,7 +66,7 @@ function ConnectWallet(){
   if(address){
     return(
       <div>
-        You are Logged In {address}
+        You are Logged In - {address}
         <br />
         <button onClick={() => {
           disconnect();
