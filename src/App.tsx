@@ -33,6 +33,15 @@ function TotalSupply(){
   )
 }
 
+function Account(){
+  const {address} = useAccount()
+  return(
+    <div>
+      {address ? "You Are Connected"+ address : "You Are Not Connected"} 
+    </div>
+  )
+}
+
 function BalanceOf(){
   const {address} = useAccount();
   const {data, isLoading, error} = useReadContract({
