@@ -1,4 +1,5 @@
 import { id, JsonRpcProvider } from "ethers";
+import { getBlockNumber } from "viem/actions";
 
 const provider = new JsonRpcProvider("https://eth-mainnet.g.alchemy.com/v2/ch2xeAWYr9E6ShlCU3e2VI7wvh5dXXhj");
 
@@ -13,8 +14,14 @@ async function pollBlock(blockNumber: number){
 }
 
 async function main(){
-    const currentblock = 1;
-    while(1){
-        await pollBlock(currentblock)
-    } 
+let currentBlock = 0;
+
+while (true) {
+    const latestBlock = await provider.getBlockNumber();
+
+    while (currentBlock <= latestBlock - 32) {
+        await pollBlock(currentBlock);
+        currentBlock++;
+    }
+}
 }
